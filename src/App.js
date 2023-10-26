@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Fragment, useState, useEffect} from 'react'
+import Navbar from './components/Navbar';
+import ListaProducts from './components/ListaProducts';
 
 function App() {
+  
+  const [productos, setproductos] = useState([])
+
+  useEffect(() => {
+    const getProducts = ()=>{
+      fetch('https://websupapi.onrender.com/api/products')
+      .then(res => res.json())
+      .then(res => setproductos(res))
+    }
+    getProducts();
+  }, [])
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Navbar brand='Inventario Deposito Pasteur'/>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-7'>
+            <h2 style={{textAlign:'center'}}>Lista de Productos</h2>
+            <ListaProducts productos= {productos}/>
+          </div>
+          <div className='col-5'>
+          <h2 style={{textAlign:'center'}}>Formulario</h2>
+          </div>
+        </div>
+      </div>
+      
+    </Fragment>
+      
   );
 }
 
