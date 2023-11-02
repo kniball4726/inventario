@@ -18,10 +18,12 @@ function Agregar() {
         console.log(productos)
         axios.post('https://websupapi.onrender.com/api/add/', productos)
         .then(res =>{
-            alert(res.productos)
+            alert('Producto agregado con exito')
         })
         .then(err => {console.log(err)})
     }
+
+    
 
     return(
         <div className='container'>
@@ -35,7 +37,7 @@ function Agregar() {
                         <input type='number' className='form-control' value={codigo} onChange={(e) => {setCodigo(e.target.value)}}></input>
                     </div>
                     <div className='mb-3'>
-                        <label htmlFor='producto' className='form-label'>Producto</label>
+                        <label htmlFor='producto' className='form-label'>Producto</label> 
                         <input type='text' className='form-control' value={producto} onChange={(e) => {setProducto(e.target.value)}}></input>
                     </div>
                     <div className='mb-3'>
